@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Shikayat — Civic Issue Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ══════════ AUTH SCREEN ══════════ -->
+  <section id="auth-screen" class="screen active">
+    <div class="auth-card">
+      <div class="brand">
+        <div class="brand-mark">📢</div>
+        <h1>Shikayat <span>شکایت</span></h1>
+        <p class="tagline">Your city. Your complaint. Tracked.</p>
+      </div>
+      <div class="tabs" id="auth-tabs">
+        <button class="tab active" data-tab="login">Login</button>
+        <button class="tab" data-tab="register">Register</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <label>Email
+          <input type="email" id="login-email" placeholder="you@example.com" required />
+        </label>
+        <label>Password
+          <input type="password" id="login-password" placeholder="••••••••" required />
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+      </form>
+
+      <form id="register-form" class="auth-form hidden">
+        <label>Full Name
+          <input type="text" id="reg-name" placeholder="Your name" minlength="2" required />
+        </label>
+        <label>Email
+          <input type="email" id="reg-email" placeholder="you@example.com" required />
+        </label>
+        <label>Password <small>(min 8 chars)</small>
+          <input type="password" id="reg-password" placeholder="••••••••" minlength="8" required />
+        </label>
+        <label>Role
+          <select id="reg-role">
+            <option value="citizen">Citizen</option>
+            <option value="officer">Municipal Officer</option>
+            <option value="admin">Admin</option>
+          </select>
+        </label>
+        <label id="reg-ward-wrap" class="hidden">Ward / Area
+          <input type="text" id="reg-ward" placeholder="e.g. Gulshan-e-Iqbal" />
+        </label>
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+      <p class="demo-note">Demo: citizen@shikayat.pk / citizen123 · officer@shikayat.pk / officer123 · admin@shikayat.pk / admin12345</p>
+    </div>
+  </section>
+
+  <!-- ══════════ APP SCREEN ══════════ -->
+  <section id="app-screen" class="screen">
+    <header class="topbar">
+      <div class="brand-mini">📢 Shikayat</div>
+      <div class="topbar-right">
+        <span id="user-chip" class="chip"></span>
+        <button id="logout-btn" class="btn btn-ghost btn-sm">Logout</button>
+      </div>
+    </header>
+
+    <nav class="nav-tabs" id="main-nav">
+      <button class="nav-tab active" data-view="dashboard">Dashboard</button>
+      <button class="nav-tab" data-view="report">Report</button>
+      <button class="nav-tab admin-only hidden" data-view="admin">Admin</button>
+      <button class="nav-tab officer-only hidden" data-view="queue">My Queue</button>
+    </nav>
+
+    <main class="content">
+      <!-- Dashboard -->
+      <div id="view-dashboard" class="view active">
+        <div class="stats-grid" id="public-stats">
+          <div class="stat-card"><span class="stat-num" id="stat-total">–</span><span class="stat-label">Total Reported</span></div>
+          <div class="stat-card"><span class="stat-num" id="stat-resolved">–</span><span class="stat-label">Resolved</span></div>
+          <div class="stat-card"><span class="stat-num" id="stat-rate">–</span><span class="stat-label">Resolve Rate</span></div>
+        </div>
+
+        <div class="filters">
+          <select id="filter-status">
+            <option value="">All statuses</option>
+            <option value="submitted">Submitted</option>
+            <option value="verified">Verified</option>
+            <option value="in_progress">In Progress</option>
+            <option value="resolved">Resolved</option>
+            <option value="rejected">Rejected</option>
+            <option value="reopened">Reopened</option>
+          </select>
+          <label class="check"><input type="checkbox" id="filter-mine" /> Mine only</label>
+        </div>
+
+        <div id="complaint-list" class="card-list"></div>
+      </div>
+
+      <!-- Report form -->
+      <div id="view-report" class="view">
+        <div class="card form-card">
+          <h2>Report an issue 🚧</h2>
+          <form id="report-form">
+            <label>Title
+              <input type="text" id="rep-title" placeholder="Broken street light on Main Road" minlength="8" required />
+            </label>
+            <label>Category
+              <select id="rep-category" required></select>
+            </label>
+            <label>Description
+              <textarea id="rep-desc" placeholder="Describe the problem — location, how long it's been there, how it affects you…" minlength="20" required></textarea>
+            </label>
+            <div class="two-col">
+              <label>Ward / Area
+                <input type="text" id="rep-ward" placeholder="e.g. Gulshan Block 7" />
+              </label>
+              <label>Severity
+                <select id="rep-severity">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit Complaint</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Admin -->
+      <div id="view-admin" class="view">
+        <div class="stats-grid">
+          <div class="stat-card"><span class="stat-num" id="adm-total">–</span><span class="stat-label">Total</span></div>
+          <div class="stat-card"><span class="stat-num" id="adm-open">–</span><span class="stat-label">Open</span></div>
+          <div class="stat-card"><span class="stat-num" id="adm-resolved">–</span><span class="stat-label">Resolved</span></div>
+        </div>
+        <h2>Officers</h2>
+        <div id="officer-list" class="chips"></div>
+        <h2>Complaints to verify</h2>
+        <div id="admin-complaint-list" class="card-list"></div>
+      </div>
+
+      <!-- Officer queue -->
+      <div id="view-queue" class="view">
+        <h2>My Queue 📋</h2>
+        <div id="queue-list" class="card-list"></div>
+      </div>
+    </main>
+  </section>
+
+  <!-- Complaint detail modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <span id="modal-ticket" class="ticket"></span>
+        <button id="modal-close" class="btn btn-ghost btn-sm">✕</button>
+      </div>
+      <h3 id="modal-title"></h3>
+      <div class="badge-row">
+        <span id="modal-status" class="badge"></span>
+        <span id="modal-priority" class="badge badge-gold"></span>
+      </div>
+      <p id="modal-desc" class="muted"></p>
+      <div class="meta-grid" id="modal-meta"></div>
+      <div id="modal-actions" class="modal-actions"></div>
+      <h4>Timeline</h4>
+      <div id="modal-history" class="timeline"></div>
+      <h4>Comments</h4>
+      <div id="modal-comments" class="comment-list"></div>
+      <form id="comment-form" class="comment-form">
+        <input type="text" id="comment-body" placeholder="Add a comment…" maxlength="1000" required />
+        <button type="submit" class="btn btn-sm btn-primary">Post</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
