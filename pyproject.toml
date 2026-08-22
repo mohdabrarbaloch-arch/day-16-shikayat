@@ -1,0 +1,11 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+# B008 is the standard FastAPI Depends()-in-defaults pattern — ignore it.
+# ANN requires type annotations on everything (covered by B008's sibling rules).
+ignore = ["B008", "ANN"]
+
+[tool.ruff.format]
+quote-style = "double"
