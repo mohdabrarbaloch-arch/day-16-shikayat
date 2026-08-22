@@ -29,11 +29,11 @@ Shikayat is a full-stack civic complaint tracker built for Pakistani cities. Cit
 
 | Auth | Citizen dashboard | Report form | Admin |
 |---|---|---|---|
-| ![auth](docs/screenshots/auth.png) | ![dashboard](docs/screenshots/dashboard.png) | ![report](docs/screenshots/report.png) | ![admin](docs/screenshots/admin.png) |
+| ![auth](https://static.teamily.ai/sites/24b16824-5a02-41eb-af47-c4372b8a0584/documents/auth/auth.png) | ![dashboard](https://static.teamily.ai/sites/24b16824-5a02-41eb-af47-c4372b8a0584/documents/dashboard/dashboard.png) | ![report](https://static.teamily.ai/sites/24b16824-5a02-41eb-af47-c4372b8a0584/documents/report/report.png) | ![admin](https://static.teamily.ai/sites/24b16824-5a02-41eb-af47-c4372b8a0584/documents/admin/admin.png) |
 
 | Complaint detail |
 |---|
-| ![detail](docs/screenshots/detail.png) |
+| ![detail](https://static.teamily.ai/sites/24b16824-5a02-41eb-af47-c4372b8a0584/documents/detail/detail.png) |
 
 ## 🚀 Live Demo
 
